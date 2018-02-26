@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="maphilight/jquery.maphilight.js"></script>
+	  <link href="stylesheets/custom.css" rel="stylesheet">
+    <script type="text/javascript">
+  		$(function() {
+        $('.map').maphilight();
+      });
+  	</script>
+    <link rel="stylesheet" href="font_files/digital_dream_regular/stylesheet.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="font_files/ffftusj_bold_macroman/stylesheet.css" type="text/css" charset="utf-8" />
+    <style>
+      canvas {font-family: 'digital_dreamregular', 'fff_tusjbold', sans-serif; margin: 0; padding: 0;}
+    </style>
+  </head>
+  <center><body onload="redraw()">
+    <canvas id="canvas" width=500 height=120 style="background: url('backgrounds/lcd.jpg');" border="0"></canvas>
+    <img name="calculator-map_image" src="backgrounds/calculator_buttons_with_logo.jpg" width="500" height="408" border="0" id="calculator_image" class="map" usemap="#calculator-map">
+    <map name="calculator-map" id="calculator-map">
+      <area alt="" title="clear" href="#" shape="poly" coords="413,26,423,14,471,14,482,24,482,38,473,49,421,49,412,40" onclick="ce();redraw()" />
+      <area alt="" title="seven" href="#" shape="poly" coords="20,95,26,84,35,79,75,79,85,85,90,95,91,116,86,124,81,131,34,132,24,126,19,113" onclick="seven();redraw()" />
+      <area alt="" title="eight" href="#" shape="poly" coords="112,115,113,93,118,83,129,78,167,79,177,83,183,92,183,119,178,126,170,132,124,131,116,125" onclick="eight();redraw()" />
+      <area alt="" title="nine" href="#" shape="poly" coords="210,84,219,79,260,78,269,84,274,92,274,117,270,126,259,132,217,132,208,124,203,116,204,92" onclick="nine();redraw()" />
+      <area alt="" title="mult" href="#" shape="poly" coords="324,84,334,77,373,78,383,82,390,96,389,116,383,125,376,132,336,131,325,125,319,113,319,92" onclick="mult();redraw()" />
+      <area alt="" title="div" href="#" shape="poly" coords="413,94,418,83,430,78,465,78,474,81,482,91,483,116,477,124,470,130,426,131,417,123,413,114" onclick="div();redraw()" />
+      <area alt="" title="four" href="#" shape="poly" coords="21,162,26,154,37,148,75,147,85,154,90,163,91,187,85,196,74,203,31,201,22,191,18,182" onclick="four();redraw()" />
+      <area alt="" title="five" href="#" shape="poly" coords="113,162,121,154,130,147,169,148,180,156,184,166,184,186,178,197,167,203,127,202,115,194,113,184" onclick="five();redraw()" />
+      <area alt="" title="six" href="#" shape="poly" coords="210,154,221,147,258,147,270,154,275,163,274,188,269,196,258,202,219,201,208,193,205,182,204,163" onclick="six();redraw()" />
+      <area alt="" title="sub" href="#" shape="poly" coords="326,152,336,146,373,147,383,151,389,159,390,184,385,194,376,199,335,200,323,192,318,183,319,162" onclick="sub();redraw()" />
+      <area alt="" title="one" href="#" shape="poly" coords="25,226,37,219,78,219,87,227,91,235,91,259,85,269,74,273,37,273,24,266,20,253,21,236" onclick="one();redraw()" />
+      <area alt="" title="two" href="#" shape="poly" coords="113,236,118,225,129,218,171,218,179,225,185,235,184,258,180,266,168,272,127,272,117,264,113,255" onclick="two();redraw()" />
+      <area alt="" title="three" href="#" shape="poly" coords="203,236,210,223,223,216,260,216,270,224,275,234,275,257,271,263,260,271,222,271,210,264,203,255" onclick="three();redraw()" />
+      <area alt="" title="plus" href="#" shape="poly" coords="325,223,336,216,377,217,387,227,391,237,391,320,385,333,373,341,336,341,324,334,318,321,319,237" onclick="add();redraw()" />
+      <area alt="" title="zero" href="#" shape="poly" coords="27,294,37,289,74,288,85,293,92,304,91,328,87,336,76,344,36,343,24,333,21,321,22,301" onclick="zero();redraw()" />
+      <area alt="" title="point" href="#" shape="poly" coords="119,294,130,287,171,288,179,293,185,304,185,326,178,335,169,342,129,342,118,332,113,322,113,302" onclick="point();redraw()" />
+      <area alt="" title="equals" href="#" shape="poly" coords="419,290,429,284,465,284,475,290,482,297,483,322,477,332,467,338,431,339,418,332,413,320,413,300" onclick="equals();redraw()" />
+      <area alt="" title="percent" href="#" shape="poly" coords="211,292,220,288,260,287,269,291,275,299,276,326,271,333,264,340,224,343,211,336,205,327,204,303" onclick="percent();redraw()" />
+      <area alt="" title="root" href="#" shape="poly" coords="418,152,427,148,465,147,475,152,481,160,483,182,478,192,469,200,432,202,420,197,413,187,413,163" onclick="root();redraw()" />
+      <area alt="" title="negate" href="#" shape="poly" coords="418,224,429,216,467,216,477,223,483,235,483,255,478,263,468,270,433,272,417,265,413,255,413,231" onclick="negate();redraw()" />
+      <area alt="" title="mc" href="#" shape="poly" coords="19,26,25,19,32,15,76,13,85,18,90,26,90,38,86,46,79,49,30,50,21,43,19,36" onclick="mc();redraw()" />
+      <area alt="" title="mr" href="#" shape="poly" coords="113,25,117,19,125,14,170,14,179,18,183,26,183,38,179,45,173,50,125,51,114,44,111,37" onclick="mr();redraw()" />
+      <area alt="" title="mplus" href="#" shape="poly" coords="319,26,324,18,332,14,377,14,385,19,389,24,389,39,385,46,378,50,331,50,321,43,318,36" onclick="mplus();redraw()" />
+      <area alt="" title="mminus" href="#" shape="poly" coords="204,26,210,19,219,14,262,14,270,19,275,26,275,36,270,46,261,51,215,50,206,45,203,37" onclick="mminus();redraw()" />
+      <!-- map for buttons without MaxWhere logo
+      <area alt="" title="seven" shape="poly" coords="28,80,39,75,72,76,84,81,87,118,78,127,37,127,22,119,21,87" onclick="seven();redraw()" />
+      <area alt="" title="eight" shape="poly" coords="116,83,127,75,167,77,177,87,177,114,168,126,124,127,112,119,110,88" onclick="eight();redraw()" />
+      <area alt="" title="nine" shape="poly" coords="205,82,216,75,253,76,262,81,268,91,268,112,263,120,256,126,215,128,206,123,201,116,200,90" onclick="nine();redraw()" />
+      <area alt="" title="four" shape="poly" coords="24,151,34,144,79,145,84,152,89,157,89,179,86,189,78,195,31,195,23,188,19,177,19,160" onclick="four();redraw()" />
+      <area alt="" title="five" shape="poly" coords="116,150,125,144,164,143,172,150,178,159,179,180,175,188,166,196,124,196,115,189,110,181,110,159" onclick="five();redraw()" />
+      <area alt="" title="six" shape="poly" coords="202,186,209,193,255,194,263,190,268,182,268,159,264,151,258,145,213,144,205,148,200,157" onclick="six();redraw()" />
+      <area alt="" title="one" shape="poly" coords="21,224,28,216,39,211,76,212,83,217,89,225,90,250,84,259,75,264,33,263,24,256,20,246" onclick="one();redraw()" />
+      <area alt="" title="two" shape="poly" coords="116,218,125,212,167,212,174,216,178,224,179,249,174,257,168,260,126,263,116,256,111,249,111,225" onclick="two();redraw()" />
+      <area alt="" title="three" shape="poly" coords="205,217,213,212,257,211,264,218,269,227,268,245,264,256,256,261,215,263,203,255,200,247,200,227" onclick="three();redraw()" />
+      <area alt="" title="zero" shape="poly" coords="27,284,37,279,75,279,84,284,91,295,91,315,84,325,77,331,33,329,22,321,21,311,20,293" onclick="zero();redraw()" />
+      <area alt="" title="point" shape="poly" coords="116,285,124,278,167,278,175,285,180,294,180,314,176,323,167,329,125,330,112,321,110,313,111,292" onclick="point();redraw()" />
+      <area alt="" title="mult" shape="poly" coords="317,80,327,76,365,75,375,83,380,91,379,115,372,124,364,127,324,125,315,120,312,111,312,91" onclick="mult();redraw()" />
+      <area alt="" title="sub" shape="poly" coords="316,149,325,143,364,143,375,148,380,159,380,182,374,187,367,194,324,193,316,188,312,177,311,159" onclick="sub();redraw()" />
+      <area alt="" title="add" shape="poly" coords="316,219,325,211,367,211,376,217,381,227,380,312,375,321,363,328,328,328,317,321,312,312,312,229" onclick="add();redraw()" />
+      <area alt="" title="div" shape="poly" coords="411,79,404,89,403,111,407,120,415,125,455,127,463,121,469,113,470,91,463,80,453,75,421,74" onclick="div();redraw()" />
+      <area alt="" title="equals" shape="poly" coords="407,281,421,276,456,276,466,281,469,288,471,312,466,320,457,327,419,328,409,321,403,313,403,293" onclick="equals();redraw()" />
+      <area alt="" title="clear" shape="poly" coords="403,25,413,14,459,14,469,23,470,39,460,46,411,47,403,38" onclick="ce();redraw()" /> -->
+    </map>
+    <script>
+      var num1 = "";
+      var num2 = "";
+      var sign = "";
+      var mem = "";
+      var p = false;  // true when a decimal number is being entered (prevents more than one decimal point to be entered when entering a decimal number)
+      var space = 25;
+      var center = 7;
+      function mc()
+      {
+        mem = "";
+      }
+      function mr()
+      {
+        num1 = mem;
+      }
+      function mplus()
+      {
+        if(num2 == "" && num1 != "")
+        {
+          if(mem == "")
+          {
+            mem = num1;
+          }
+          else
+          {
+            mem += "+" + num1;
+          }
+          mem = parseFloat(eval(mem).toFixed(12)).toString();
+        }
+        else if(num2 != "")
+        {
+          equals();
+          if(mem == "")
+          {
+            mem = num1;
+          }
+          else
+          {
+            mem += "+" + num1;
+          }
+          mem = parseFloat(eval(mem).toFixed(12)).toString();
+        }
+      }
+      function mminus()
+      {
+        if(num2 == "" && num1 != "")
+        {
+          if(mem == "")
+          {
+            if(num1.substring(0, 1) == "-")
+            {
+              mem = num1.substring(1, num1.length);
+            }
+            else
+            {
+              mem = "-" + num1;
+            }
+          }
+          else
+          {
+            mem += "-" + "(" + num1 + ")";
+          }
+          mem = parseFloat(eval(mem).toFixed(12)).toString();
+        }
+        else if(num2 != "")
+        {
+          equals();
+          if(mem == "")
+          {
+            mem = "-" + num1;
+          }
+          else
+          {
+            mem += "-" + num1;
+          }
+          mem = parseFloat(eval(mem).toFixed(12)).toString();
+        }
+      }
+      function one()
+      {
+        if(sign != "")
+        {
+          num2 += "1";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "1";
+          }
+          else
+          {
+            num1 += "1";
+          }
+        }
+      }
+      function two()
+      {
+        if(sign != "")
+        {
+          num2 += "2";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "2";
+          }
+          else
+          {
+            num1 += "2";
+          }
+        }
+      }
+      function three()
+      {
+        if(sign != "")
+        {
+          num2 += "3";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "3";
+          }
+          else
+          {
+            num1 += "3";
+          }
+        }
+      }
+      function four()
+      {
+        if(sign != "")
+        {
+          num2 += "4";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "4";
+          }
+          else
+          {
+            num1 += "4";
+          }
+        }
+      }
+      function five()
+      {
+        if(sign != "")
+        {
+          num2 += "5";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "5";
+          }
+          else
+          {
+            num1 += "5";
+          }
+        }
+      }
+      function six()
+      {
+        if(sign != "")
+        {
+          num2 += "6";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "6";
+          }
+          else
+          {
+            num1 += "6";
+          }
+        }
+      }
+      function seven()
+      {
+        if(sign != "")
+        {
+          num2 += "7";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "7";
+          }
+          else
+          {
+            num1 += "7";
+          }
+        }
+      }
+      function eight()
+      {
+        if(sign != "")
+        {
+          num2 += "8";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "8";
+          }
+          else
+          {
+            num1 += "8";
+          }
+        }
+      }
+      function nine()
+      {
+        if(sign != "")
+        {
+          num2 += "9";
+        }
+        else
+        {
+          if(num1.charAt(0) == "0" && p != true)
+          {
+            num1 = "9";
+          }
+          else
+          {
+            num1 += "9";
+          }
+        }
+      }
+      function zero()
+      {
+        if(sign != "")
+        {
+          num2 += "0";
+        }
+        else
+        {
+          num1 += "0";
+        }
+      }
+      function point()
+      {
+        if(p != true)
+        {
+          if(sign == "")
+          {
+            if(num1 == "")
+            {
+              num1 += "0.";
+              p = true;
+            }
+            else
+            {
+              num1 += ".";
+              p = true;
+            }
+          }
+          else
+          {
+            if(num2 == "")
+            {
+              num2 += "0.";
+              p = true;
+            }
+            else
+            {
+              num2 += ".";
+              p = true;
+            }
+          }
+        }
+      }
+      function sub()
+      {
+        if(num1 == "")
+        {
+          num1 = "0";
+          sign = "-";
+        }
+        else
+        {
+          if(num2 == "")
+          {
+            sign = "-";
+          }
+          else
+          {
+            equals();
+            sign = "-";
+          }
+        }
+        p = false;
+      }
+      function add()
+      {
+        if(num1 == "")
+        {
+          num1 = "0";
+          sign = "+";
+        }
+        else
+        {
+          if(num2 == "")
+          {
+            sign = "+";
+          }
+          else
+          {
+            equals();
+            sign = "+";
+          }
+        }
+        p = false;
+      }
+      function mult()
+      {
+        if(num1 == "")
+        {
+          num1 = "0";
+          sign = "*";
+        }
+        else
+        {
+          if(num2 == "")
+          {
+            sign = "*";
+          }
+          else
+          {
+            equals();
+            sign = "*";
+          }
+        }
+        p = false;
+      }
+      function div()
+      {
+        if(num1 == "")
+        {
+          num1 = "0";
+          sign = "/";
+        }
+        else
+        {
+          if(num2 == "")
+          {
+            sign = "/";
+          }
+          else
+          {
+            equals();
+            sign = "/";
+          }
+        }
+        p = false;
+      }
+      function percent()
+      {
+        if(num2 == "")
+        {
+          if(num1 != "")
+          {
+            num1 += "/100";
+            num1 = eval(num1).toString();
+          }
+        }
+        else
+        {
+          if(sign == "+" || sign == "-")
+          {
+            num2 = num1 + "*" + num2 + "/100";
+          }
+          else
+          {
+            num2 = "(" + num2 + "/100)";
+          }
+        }
+        equals();
+      }
+      function root()
+      {
+        if(num2 == "")
+        {
+          if(num1 != "")
+          {
+            if(num1 < 0)
+            {
+              var newnum = eval(num1) * (-1);
+              num1 = newnum.toString();
+            }
+            num1 = (Math.sqrt(eval(num1))).toString();
+            sign = "";
+          }
+        }
+        else
+        {
+          if(num2 < 0)
+          {
+            var newnum = eval(num2) * (-1);
+            num2 = newnum.toString();
+          }
+          num2 = (Math.sqrt(eval(num2))).toString();
+        }
+        p = false;
+      }
+      function negate()
+      {
+        if(num2 != "")
+        {
+          var newnum = eval(num2) * (-1);
+          num2 = newnum.toString();
+        }
+        else if(num2 == "" && num1 != "")
+        {
+          var newnum = eval(num1) * (-1);
+          num1 = newnum.toString();
+        }
+        else
+        {
+          if(num1 == "")
+          {
+            num1 = "-";
+          }
+          else
+          {
+            num1 = "";
+          }
+        }
+      }
+      function ce()
+      {
+        num1 = "";
+        num2 = "";
+        sign = "";
+        p = false;
+      }
+      function equals()
+      {
+        if(num1.charAt(num1.length - 1) == ".")
+        {
+          num1 = num1.substring(0, num1.length - 1);
+        }
+        if(num2.charAt(num2.length - 1) == ".")
+        {
+          num2 = num2.substring(0, num2.length - 1);
+        }
+        var entered = num1 + sign + "(" + num2 + ")";
+        if(sign != "" && num2 == "")
+        {
+          entered = entered.substring(0, entered.length - 1);
+        }
+        num1 = parseFloat(eval(entered).toFixed(12)).toString();
+        sign = "";
+        num2 = "";
+        if(num1 % 1 != 0)
+        {
+          p = true;
+        }
+      }
+      function redraw()
+      {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        ctx.font = "normal normal normal 55px digital_dreamregular";
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "end";
+        if(num1 == "")
+        {
+          ctx.fillText("0", ctx.canvas.width - space, ctx.canvas.height / 2 + center, ctx.canvas.width - 2 * space);
+        }
+        else
+        {
+          if(sign == "")
+          {
+            ctx.fillText(num1, ctx.canvas.width - space, ctx.canvas.height / 2 + center, ctx.canvas.width - 2 * space);
+          }
+          else
+          {
+            if(num2 == "")
+            {
+              var print = num1 + sign;
+              ctx.fillText(print, ctx.canvas.width - space, ctx.canvas.height / 2 + center, ctx.canvas.width - 2 * space);
+            }
+            else
+            {
+              ctx.fillText(num2, ctx.canvas.width - space, ctx.canvas.height / 2 + center, ctx.canvas.width - 2 * space);
+            }
+          }
+        }
+      }
+      redraw();
+    </script>
+  </body></center>
+</html>
